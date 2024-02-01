@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.jsn.adevent.reducer.grpc";
+option java_outer_classname = "AdEventProto";
+
+//package com.jsn.adevent.reducer.grpc;
+
+// The AdEvent service definition.
+service AdClickEventService {
+  // Sends an AdEventMap
+  rpc SendEvent (AdEventMap) returns (Empty) {}
+}
+
+// The AdEventMap message containing a list of AdEvent.
+message AdEventMap {
+  repeated AdEvent events = 1;
+}
+
+// The AdEvent message containing the adId and timestamp.
+message AdEvent {
+  int64 adId = 1;
+  int64 timestamp = 2;
+}
+
+// The Empty message is used when no response is required.
+message Empty {}

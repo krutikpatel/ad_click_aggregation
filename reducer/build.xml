@@ -1,0 +1,43 @@
+<project name="mapper" default="all" basedir=".">
+    <property environment="env"/>
+    
+    <!--
+        compile protoc and grpc 
+    -->
+    
+	<target name="clean">
+        <exec executable="mvn" dir="${basedir}">
+            <arg value="clean"/>
+        </exec>
+        <!-- shud also remove protoc generated files -->
+        <delete dir="${basedir}/src/main/java/com/jsn/adevent/reducer/grpc"/>
+    </target>
+    <target name="mvn-package" depends="clean, generate-proto">
+        <exec executable="mvn" dir="${basedir}">
+            <arg value="package"/>
+        </exec>
+    </target>
+    <!--
+    <target name="docker-build">
+        <exec executable="docker" dir="${basedir}">
+            <arg value="build"/>
+            <arg value="-t"/>
+            <arg value="your-image-name"/>
+            <arg value="."/>
+        </exec>
+    </target>
+
+    <target name="all" depends="mvn-package,docker-build"/>
+    -->
+
+    <target name="generate-proto">
+        <exec executable="./libproto/bin/protoc">
+            <arg value="-I=src/main/proto"/>
+            <arg value="--plugin=protoc-gen-grpc-java=libproto/bin/protoc-gen-grpc-java"/>
+            <arg value="--java_out=src/main/java/"/>
+            <arg value="--grpc-java_out=src/main/java/"/>
+            <arg value="src/main/proto/adeventservice.proto"/>
+        </exec>
+    </target>
+    <target name="all" depends="mvn-package"/>
+</project>
