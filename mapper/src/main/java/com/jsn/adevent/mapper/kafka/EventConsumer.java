@@ -43,6 +43,8 @@ public class EventConsumer {
     @Autowired
     EventMapper eventMapper;
 
+	KafkaConsumer<String, String> consumer;
+
 	@PostConstruct
 	public void init() {
 		logger.info("EventConsumer init");
@@ -54,7 +56,7 @@ public class EventConsumer {
         props.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         props.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+        consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList(TOPIC_AD_EVENT));
 
 		//create async thread to poll from kafka and process
@@ -64,16 +66,19 @@ public class EventConsumer {
 				int count = 0;
 				while (true) {
 					//poll from kafka
-					ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-					
+					ConsumerRecords<String, String> records;
+					synchronized(consumer) {
+						records = consumer.poll(Duration.ofMillis(100));
+					}
 					for (ConsumerRecord<String, String> record : records) {
-						String msg = String.format("[kafka poll] offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
-						logger.info(msg);
+						//String msg = String.format("[kafka poll] offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+						//logger.info(msg);
 
 						//process the message
 						try {
 							AdClickEvent event = objMapper.readValue(record.value(), AdClickEvent.class);
-							logger.info("Received event Message adId = : " + event.getAdId());
+							event.setKafkaOffset(record.offset());
+							logger.info("Received event Message adId = : " + event.getAdId() + " and offset = "+event.getKafkaOffset());
 							
 							//send it to mapper
 							eventMapper.sendEvent(event);
@@ -83,7 +88,9 @@ public class EventConsumer {
 							logger.error("[listenOrdersTopic] exception in parsing order"+e);
 						}
 
-						//commit the offset every 10th message
+						
+						/*
+						//commit the offset every 10th message - for experimentation
 						if (count % 10 == 0) {
 							// Commit specific offset
 							Map<TopicPartition, OffsetAndMetadata> commitMessage = new HashMap<>();
@@ -91,6 +98,7 @@ public class EventConsumer {
 							consumer.commitSync(commitMessage);
 							logger.info("committed offset = "+record.offset()+" for topic = "+record.topic()+" partition = "+record.partition()+" value = "+record.value());
 						}
+						*/
 						count++;
 					}
 					//process the message
@@ -100,9 +108,21 @@ public class EventConsumer {
 				consumer.close();
 			}
 		}, executor);
-		//polling one at a time and periodically commit the offset
-
 	}
+
+	
+	public void commitOffset(long offset) {
+		// Commit specific offset
+		Map<TopicPartition, OffsetAndMetadata> commitMessage = new HashMap<>();
+		commitMessage.put(new TopicPartition(TOPIC_AD_EVENT, 0), new OffsetAndMetadata(offset + 1));
+		
+		synchronized(consumer) {
+			consumer.commitSync(commitMessage);
+		}
+		
+		logger.info("committed offset = "+offset+" for topic = "+TOPIC_AD_EVENT);
+	}
+
 
 	/*
 	@KafkaListener(topics = TOPIC_AD_EVENT, groupId = "gp1")

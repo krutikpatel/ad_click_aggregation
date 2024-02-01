@@ -32,7 +32,7 @@ public class Receiver extends AdClickEventServiceImplBase {
     @Override
     public void sendEvent(AdEventMap request, StreamObserver<Empty> responseObserver) {
         //super.sendEvent(request, responseObserver);
-        logger.info("Reducer: received event : "+request.getEvents(0).getAdId()+" "+request.getEvents(0).getTimestamp());
+        logger.info("Reducer: received event : "+request.getEvents(0).getAdId()+" "+request.getEvents(0).getTimestamp() + " offset : "+request.getEvents(0).getKafkaOffset());
         reducer.enqueEvent(request.getEvents(0));
         responseObserver.onNext(Empty.newBuilder().build());
         responseObserver.onCompleted();

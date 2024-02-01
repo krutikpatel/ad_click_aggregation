@@ -42,18 +42,21 @@ public class EventMapper {
     int port = 10002;
 
     public EventMapper() {
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", port).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
         blockingStub = AdClickEventServiceGrpc.newBlockingStub(channel);
     }
 
     /*
-     * send via gRpc
+     * send via gRpc.
+     * This object is grpcClient, since it is sending data to grpc server
+     * TODO: make it async ?
      */
     public void sendEvent(AdClickEvent event) {
         AdEventMap request = AdEventMap.newBuilder()
             .addEvents(AdEvent.newBuilder()
             .setAdId(event.getAdId())
             .setTimestamp(event.getTimestamp())
+            .setKafkaOffset(event.getKafkaOffset())
             .build())
             .build();
         blockingStub.sendEvent(request);

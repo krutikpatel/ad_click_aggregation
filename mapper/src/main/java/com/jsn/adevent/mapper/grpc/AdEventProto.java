@@ -30,6 +30,11 @@ public final class AdEventProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Empty_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Offset_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Offset_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -40,11 +45,14 @@ public final class AdEventProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\024adeventservice.proto\"&\n\nAdEventMap\022\030\n\006" +
-      "events\030\001 \003(\0132\010.AdEvent\"*\n\007AdEvent\022\014\n\004adI" +
-      "d\030\001 \001(\003\022\021\n\ttimestamp\030\002 \001(\003\"\007\n\005Empty29\n\023A" +
-      "dClickEventService\022\"\n\tSendEvent\022\013.AdEven" +
-      "tMap\032\006.Empty\"\000B-\n\033com.jsn.adevent.mapper" +
-      ".grpcB\014AdEventProtoP\001b\006proto3"
+      "events\030\001 \003(\0132\010.AdEvent\"?\n\007AdEvent\022\014\n\004adI" +
+      "d\030\001 \001(\003\022\021\n\ttimestamp\030\002 \001(\003\022\023\n\013kafkaOffse" +
+      "t\030\003 \001(\003\"\007\n\005Empty\"\030\n\006Offset\022\016\n\006offset\030\001 \001" +
+      "(\00329\n\023AdClickEventService\022\"\n\tSendEvent\022\013" +
+      ".AdEventMap\032\006.Empty\"\00020\n\rOffsetService\022\037" +
+      "\n\nSendOffset\022\007.Offset\032\006.Empty\"\000B-\n\033com.j" +
+      "sn.adevent.mapper.grpcB\014AdEventProtoP\001b\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -61,13 +69,19 @@ public final class AdEventProto {
     internal_static_AdEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AdEvent_descriptor,
-        new java.lang.String[] { "AdId", "Timestamp", });
+        new java.lang.String[] { "AdId", "Timestamp", "KafkaOffset", });
     internal_static_Empty_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Empty_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Empty_descriptor,
         new java.lang.String[] { });
+    internal_static_Offset_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_Offset_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Offset_descriptor,
+        new java.lang.String[] { "Offset", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

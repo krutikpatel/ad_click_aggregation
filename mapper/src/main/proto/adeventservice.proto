@@ -6,7 +6,7 @@ option java_outer_classname = "AdEventProto";
 
 //package com.jsn.adevent.mapper.grpc;
 
-// The AdEvent service definition.
+// The AdEvent service definition. Mapper will send it to reducer
 service AdClickEventService {
   // Sends an AdEventMap
   rpc SendEvent (AdEventMap) returns (Empty) {}
@@ -21,7 +21,19 @@ message AdEventMap {
 message AdEvent {
   int64 adId = 1;
   int64 timestamp = 2;
+  int64 kafkaOffset = 3;
 }
 
 // The Empty message is used when no response is required.
 message Empty {}
+
+// Offset service definition. Reducer will send it to mapper
+service OffsetService {
+  // Sends an Offset
+  rpc SendOffset (Offset) returns (Empty) {}
+}
+
+// The Offset message containing the offset.
+message Offset {
+  int64 offset = 1;
+}

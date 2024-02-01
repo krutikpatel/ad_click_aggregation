@@ -6,74 +6,52 @@ package com.jsn.adevent.reducer.grpc;
 
 /**
  * <pre>
- * The AdEvent message containing the adId and timestamp.
+ * The Offset message containing the offset.
  * </pre>
  *
- * Protobuf type {@code AdEvent}
+ * Protobuf type {@code Offset}
  */
-public final class AdEvent extends
+public final class Offset extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:AdEvent)
-    AdEventOrBuilder {
+    // @@protoc_insertion_point(message_implements:Offset)
+    OffsetOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use AdEvent.newBuilder() to construct.
-  private AdEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use Offset.newBuilder() to construct.
+  private Offset(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private AdEvent() {
+  private Offset() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new AdEvent();
+    return new Offset();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_AdEvent_descriptor;
+    return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_Offset_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_AdEvent_fieldAccessorTable
+    return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_Offset_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            com.jsn.adevent.reducer.grpc.AdEvent.class, com.jsn.adevent.reducer.grpc.AdEvent.Builder.class);
+            com.jsn.adevent.reducer.grpc.Offset.class, com.jsn.adevent.reducer.grpc.Offset.Builder.class);
   }
 
-  public static final int ADID_FIELD_NUMBER = 1;
-  private long adId_ = 0L;
+  public static final int OFFSET_FIELD_NUMBER = 1;
+  private long offset_ = 0L;
   /**
-   * <code>int64 adId = 1;</code>
-   * @return The adId.
+   * <code>int64 offset = 1;</code>
+   * @return The offset.
    */
   @java.lang.Override
-  public long getAdId() {
-    return adId_;
-  }
-
-  public static final int TIMESTAMP_FIELD_NUMBER = 2;
-  private long timestamp_ = 0L;
-  /**
-   * <code>int64 timestamp = 2;</code>
-   * @return The timestamp.
-   */
-  @java.lang.Override
-  public long getTimestamp() {
-    return timestamp_;
-  }
-
-  public static final int KAFKAOFFSET_FIELD_NUMBER = 3;
-  private long kafkaOffset_ = 0L;
-  /**
-   * <code>int64 kafkaOffset = 3;</code>
-   * @return The kafkaOffset.
-   */
-  @java.lang.Override
-  public long getKafkaOffset() {
-    return kafkaOffset_;
+  public long getOffset() {
+    return offset_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -90,14 +68,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (adId_ != 0L) {
-      output.writeInt64(1, adId_);
-    }
-    if (timestamp_ != 0L) {
-      output.writeInt64(2, timestamp_);
-    }
-    if (kafkaOffset_ != 0L) {
-      output.writeInt64(3, kafkaOffset_);
+    if (offset_ != 0L) {
+      output.writeInt64(1, offset_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -108,17 +80,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (adId_ != 0L) {
+    if (offset_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, adId_);
-    }
-    if (timestamp_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(2, timestamp_);
-    }
-    if (kafkaOffset_ != 0L) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(3, kafkaOffset_);
+        .computeInt64Size(1, offset_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -130,17 +94,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof com.jsn.adevent.reducer.grpc.AdEvent)) {
+    if (!(obj instanceof com.jsn.adevent.reducer.grpc.Offset)) {
       return super.equals(obj);
     }
-    com.jsn.adevent.reducer.grpc.AdEvent other = (com.jsn.adevent.reducer.grpc.AdEvent) obj;
+    com.jsn.adevent.reducer.grpc.Offset other = (com.jsn.adevent.reducer.grpc.Offset) obj;
 
-    if (getAdId()
-        != other.getAdId()) return false;
-    if (getTimestamp()
-        != other.getTimestamp()) return false;
-    if (getKafkaOffset()
-        != other.getKafkaOffset()) return false;
+    if (getOffset()
+        != other.getOffset()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -152,58 +112,52 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ADID_FIELD_NUMBER;
+    hash = (37 * hash) + OFFSET_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getAdId());
-    hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getTimestamp());
-    hash = (37 * hash) + KAFKAOFFSET_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getKafkaOffset());
+        getOffset());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(byte[] data)
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(java.io.InputStream input)
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -211,26 +165,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseDelimitedFrom(java.io.InputStream input)
+  public static com.jsn.adevent.reducer.grpc.Offset parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseDelimitedFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static com.jsn.adevent.reducer.grpc.AdEvent parseFrom(
+  public static com.jsn.adevent.reducer.grpc.Offset parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -243,7 +197,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(com.jsn.adevent.reducer.grpc.AdEvent prototype) {
+  public static Builder newBuilder(com.jsn.adevent.reducer.grpc.Offset prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -260,29 +214,29 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <pre>
-   * The AdEvent message containing the adId and timestamp.
+   * The Offset message containing the offset.
    * </pre>
    *
-   * Protobuf type {@code AdEvent}
+   * Protobuf type {@code Offset}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:AdEvent)
-      com.jsn.adevent.reducer.grpc.AdEventOrBuilder {
+      // @@protoc_insertion_point(builder_implements:Offset)
+      com.jsn.adevent.reducer.grpc.OffsetOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_AdEvent_descriptor;
+      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_Offset_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_AdEvent_fieldAccessorTable
+      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_Offset_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.jsn.adevent.reducer.grpc.AdEvent.class, com.jsn.adevent.reducer.grpc.AdEvent.Builder.class);
+              com.jsn.adevent.reducer.grpc.Offset.class, com.jsn.adevent.reducer.grpc.Offset.Builder.class);
     }
 
-    // Construct using com.jsn.adevent.reducer.grpc.AdEvent.newBuilder()
+    // Construct using com.jsn.adevent.reducer.grpc.Offset.newBuilder()
     private Builder() {
 
     }
@@ -296,26 +250,24 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      adId_ = 0L;
-      timestamp_ = 0L;
-      kafkaOffset_ = 0L;
+      offset_ = 0L;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_AdEvent_descriptor;
+      return com.jsn.adevent.reducer.grpc.AdEventProto.internal_static_Offset_descriptor;
     }
 
     @java.lang.Override
-    public com.jsn.adevent.reducer.grpc.AdEvent getDefaultInstanceForType() {
-      return com.jsn.adevent.reducer.grpc.AdEvent.getDefaultInstance();
+    public com.jsn.adevent.reducer.grpc.Offset getDefaultInstanceForType() {
+      return com.jsn.adevent.reducer.grpc.Offset.getDefaultInstance();
     }
 
     @java.lang.Override
-    public com.jsn.adevent.reducer.grpc.AdEvent build() {
-      com.jsn.adevent.reducer.grpc.AdEvent result = buildPartial();
+    public com.jsn.adevent.reducer.grpc.Offset build() {
+      com.jsn.adevent.reducer.grpc.Offset result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -323,23 +275,17 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public com.jsn.adevent.reducer.grpc.AdEvent buildPartial() {
-      com.jsn.adevent.reducer.grpc.AdEvent result = new com.jsn.adevent.reducer.grpc.AdEvent(this);
+    public com.jsn.adevent.reducer.grpc.Offset buildPartial() {
+      com.jsn.adevent.reducer.grpc.Offset result = new com.jsn.adevent.reducer.grpc.Offset(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(com.jsn.adevent.reducer.grpc.AdEvent result) {
+    private void buildPartial0(com.jsn.adevent.reducer.grpc.Offset result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.adId_ = adId_;
-      }
-      if (((from_bitField0_ & 0x00000002) != 0)) {
-        result.timestamp_ = timestamp_;
-      }
-      if (((from_bitField0_ & 0x00000004) != 0)) {
-        result.kafkaOffset_ = kafkaOffset_;
+        result.offset_ = offset_;
       }
     }
 
@@ -377,24 +323,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof com.jsn.adevent.reducer.grpc.AdEvent) {
-        return mergeFrom((com.jsn.adevent.reducer.grpc.AdEvent)other);
+      if (other instanceof com.jsn.adevent.reducer.grpc.Offset) {
+        return mergeFrom((com.jsn.adevent.reducer.grpc.Offset)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(com.jsn.adevent.reducer.grpc.AdEvent other) {
-      if (other == com.jsn.adevent.reducer.grpc.AdEvent.getDefaultInstance()) return this;
-      if (other.getAdId() != 0L) {
-        setAdId(other.getAdId());
-      }
-      if (other.getTimestamp() != 0L) {
-        setTimestamp(other.getTimestamp());
-      }
-      if (other.getKafkaOffset() != 0L) {
-        setKafkaOffset(other.getKafkaOffset());
+    public Builder mergeFrom(com.jsn.adevent.reducer.grpc.Offset other) {
+      if (other == com.jsn.adevent.reducer.grpc.Offset.getDefaultInstance()) return this;
+      if (other.getOffset() != 0L) {
+        setOffset(other.getOffset());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -423,20 +363,10 @@ private static final long serialVersionUID = 0L;
               done = true;
               break;
             case 8: {
-              adId_ = input.readInt64();
+              offset_ = input.readInt64();
               bitField0_ |= 0x00000001;
               break;
             } // case 8
-            case 16: {
-              timestamp_ = input.readInt64();
-              bitField0_ |= 0x00000002;
-              break;
-            } // case 16
-            case 24: {
-              kafkaOffset_ = input.readInt64();
-              bitField0_ |= 0x00000004;
-              break;
-            } // case 24
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -454,98 +384,34 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private long adId_ ;
+    private long offset_ ;
     /**
-     * <code>int64 adId = 1;</code>
-     * @return The adId.
+     * <code>int64 offset = 1;</code>
+     * @return The offset.
      */
     @java.lang.Override
-    public long getAdId() {
-      return adId_;
+    public long getOffset() {
+      return offset_;
     }
     /**
-     * <code>int64 adId = 1;</code>
-     * @param value The adId to set.
+     * <code>int64 offset = 1;</code>
+     * @param value The offset to set.
      * @return This builder for chaining.
      */
-    public Builder setAdId(long value) {
+    public Builder setOffset(long value) {
 
-      adId_ = value;
+      offset_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 adId = 1;</code>
+     * <code>int64 offset = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearAdId() {
+    public Builder clearOffset() {
       bitField0_ = (bitField0_ & ~0x00000001);
-      adId_ = 0L;
-      onChanged();
-      return this;
-    }
-
-    private long timestamp_ ;
-    /**
-     * <code>int64 timestamp = 2;</code>
-     * @return The timestamp.
-     */
-    @java.lang.Override
-    public long getTimestamp() {
-      return timestamp_;
-    }
-    /**
-     * <code>int64 timestamp = 2;</code>
-     * @param value The timestamp to set.
-     * @return This builder for chaining.
-     */
-    public Builder setTimestamp(long value) {
-
-      timestamp_ = value;
-      bitField0_ |= 0x00000002;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int64 timestamp = 2;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearTimestamp() {
-      bitField0_ = (bitField0_ & ~0x00000002);
-      timestamp_ = 0L;
-      onChanged();
-      return this;
-    }
-
-    private long kafkaOffset_ ;
-    /**
-     * <code>int64 kafkaOffset = 3;</code>
-     * @return The kafkaOffset.
-     */
-    @java.lang.Override
-    public long getKafkaOffset() {
-      return kafkaOffset_;
-    }
-    /**
-     * <code>int64 kafkaOffset = 3;</code>
-     * @param value The kafkaOffset to set.
-     * @return This builder for chaining.
-     */
-    public Builder setKafkaOffset(long value) {
-
-      kafkaOffset_ = value;
-      bitField0_ |= 0x00000004;
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>int64 kafkaOffset = 3;</code>
-     * @return This builder for chaining.
-     */
-    public Builder clearKafkaOffset() {
-      bitField0_ = (bitField0_ & ~0x00000004);
-      kafkaOffset_ = 0L;
+      offset_ = 0L;
       onChanged();
       return this;
     }
@@ -562,23 +428,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:AdEvent)
+    // @@protoc_insertion_point(builder_scope:Offset)
   }
 
-  // @@protoc_insertion_point(class_scope:AdEvent)
-  private static final com.jsn.adevent.reducer.grpc.AdEvent DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:Offset)
+  private static final com.jsn.adevent.reducer.grpc.Offset DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new com.jsn.adevent.reducer.grpc.AdEvent();
+    DEFAULT_INSTANCE = new com.jsn.adevent.reducer.grpc.Offset();
   }
 
-  public static com.jsn.adevent.reducer.grpc.AdEvent getDefaultInstance() {
+  public static com.jsn.adevent.reducer.grpc.Offset getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<AdEvent>
-      PARSER = new com.google.protobuf.AbstractParser<AdEvent>() {
+  private static final com.google.protobuf.Parser<Offset>
+      PARSER = new com.google.protobuf.AbstractParser<Offset>() {
     @java.lang.Override
-    public AdEvent parsePartialFrom(
+    public Offset parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -597,17 +463,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<AdEvent> parser() {
+  public static com.google.protobuf.Parser<Offset> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<AdEvent> getParserForType() {
+  public com.google.protobuf.Parser<Offset> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.jsn.adevent.reducer.grpc.AdEvent getDefaultInstanceForType() {
+  public com.jsn.adevent.reducer.grpc.Offset getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

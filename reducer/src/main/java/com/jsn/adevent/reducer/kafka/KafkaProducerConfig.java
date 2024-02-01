@@ -13,8 +13,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-//import com.jsn.adevent.generator.model.AdClickEvent;
-
 @Configuration
 public class KafkaProducerConfig {
 

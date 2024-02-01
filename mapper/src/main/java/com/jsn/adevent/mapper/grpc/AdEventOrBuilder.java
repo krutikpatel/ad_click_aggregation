@@ -19,4 +19,10 @@ public interface AdEventOrBuilder extends
    * @return The timestamp.
    */
   long getTimestamp();
+
+  /**
+   * <code>int64 kafkaOffset = 3;</code>
+   * @return The kafkaOffset.
+   */
+  long getKafkaOffset();
 }

@@ -4,7 +4,7 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 
 /**
  * <pre>
- * The AdEvent service definition.
+ * The AdEvent service definition. Mapper will send it to reducer
  * </pre>
  */
 @javax.annotation.Generated(
@@ -95,7 +95,7 @@ public final class AdClickEventServiceGrpc {
 
   /**
    * <pre>
-   * The AdEvent service definition.
+   * The AdEvent service definition. Mapper will send it to reducer
    * </pre>
    */
   public interface AsyncService {
@@ -114,7 +114,7 @@ public final class AdClickEventServiceGrpc {
   /**
    * Base class for the server implementation of the service AdClickEventService.
    * <pre>
-   * The AdEvent service definition.
+   * The AdEvent service definition. Mapper will send it to reducer
    * </pre>
    */
   public static abstract class AdClickEventServiceImplBase
@@ -128,7 +128,7 @@ public final class AdClickEventServiceGrpc {
   /**
    * A stub to allow clients to do asynchronous rpc calls to service AdClickEventService.
    * <pre>
-   * The AdEvent service definition.
+   * The AdEvent service definition. Mapper will send it to reducer
    * </pre>
    */
   public static final class AdClickEventServiceStub
@@ -159,7 +159,7 @@ public final class AdClickEventServiceGrpc {
   /**
    * A stub to allow clients to do synchronous rpc calls to service AdClickEventService.
    * <pre>
-   * The AdEvent service definition.
+   * The AdEvent service definition. Mapper will send it to reducer
    * </pre>
    */
   public static final class AdClickEventServiceBlockingStub
@@ -189,7 +189,7 @@ public final class AdClickEventServiceGrpc {
   /**
    * A stub to allow clients to do ListenableFuture-style rpc calls to service AdClickEventService.
    * <pre>
-   * The AdEvent service definition.
+   * The AdEvent service definition. Mapper will send it to reducer
    * </pre>
    */
   public static final class AdClickEventServiceFutureStub

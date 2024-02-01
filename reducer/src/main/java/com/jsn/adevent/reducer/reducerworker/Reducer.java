@@ -20,7 +20,7 @@ import com.jsn.adevent.reducer.kafka.MessagePublisher;
 import com.jsn.adevent.reducer.model.AdClickCount;
 
 /*
- * "Tumbling Window" of 1 minute
+ * "Tumbling Window" of 1 minuteprevMap
  * 
  * May be received events just gets dumped into queue, and reducer picks up from there
  *  -because window flush is time consuming and we don't want to block the receiver
@@ -36,15 +36,16 @@ public class Reducer {
     @Autowired
     MessagePublisher kafkaSinkSender;
 
-    //create lock
-    private final Object lock = new Object();
+    @Autowired
+    OffsetSender offsetSender;
 
     // maintain a map of adId to count of clicks
-    private Map<Long, Integer> map1 = new HashMap<>();
-    private Map<Long, Integer> map2 = new HashMap<>();
+    private WindowState window1 = new WindowState();
+    private WindowState window2 = new WindowState();
+
     private boolean useMap1 = true;
-    Map<Long, Integer> currentMap = useMap1 ? map1 : map2;
-    Map<Long, Integer> mapToFlush = !useMap1 ? map1 : map2;
+    WindowState currentWindow = useMap1 ? window1 : window2;
+    WindowState prevWindow = !useMap1 ? window1 : window2; // this is the map that gets flushed
 
     private long currentMinute = 0;
     private long prevMinute = 0;
@@ -76,49 +77,50 @@ public class Reducer {
                         flush(prevMinute);
                     }
 
-                    //lock using the map u want to add to
-                    //synchronized (currentMap) {
-                        currentMap.merge(event.getAdId(), 1, Integer::sum);
-                    //}
+                    currentWindow.getWindowMap().merge(event.getAdId(), 1, Integer::sum);
+                    currentWindow.setWindowOffset(event.getKafkaOffset());
+
                     prevMinute = currentMinute;
                 }
             }
         });
 
-        // Don't forget to shutdown the executor when you're done
+        // shutdown the executor when you're done
         // executor.shutdown();
     }
 
     private void switchMaps() {
         useMap1 = !useMap1;
-        currentMap = useMap1 ? map1 : map2;
-        mapToFlush = !useMap1 ? map1 : map2;
-        logger.info("Switched to map: " + (useMap1 ? "map1" : "map2"));
-        logger.info("currentMap: " + currentMap);
-        logger.info("mapToFlush: " + mapToFlush);
+        currentWindow = useMap1 ? window1 : window2;
+        prevWindow = !useMap1 ? window1 : window2;
+        logger.info("window switched");
+        logger.info("currentWindow: " + currentWindow);
+        logger.info("prevWindow to flush: " + prevWindow);
     }
 
     /*
-     * asyncronous flush to dummyservice
+     * asyncronous flush to kafkaSink
      */
     private void flush(long flushWindowMinute) {
-        Map<Long, Integer> copyMapToFlush = new HashMap<>(mapToFlush);
-        //may be make copy and run async send task on that
-
-        //no need to lock since copy made - better than blocking the queue
-        //lock using the map to flush
-        //synchronized (mapToFlush) {
-            // Flush the map to the service asynchronously
-            CompletableFuture.runAsync(() -> {
-                copyMapToFlush.forEach((key, value) -> {
-                    dummySinkForMap(key, value, flushWindowMinute);
-                });
-            });
-        //}
+        //make copy and run async send task on that
+        WindowState toFlushWindowCopy = new WindowState(prevWindow);
         
+        //imp - clear the map after making copy
+        prevWindow.clearState();
+
+        // Flush the map to the service asynchronously
+        CompletableFuture.runAsync(() -> {
+            toFlushWindowCopy.getWindowMap().forEach((key, value) -> {
+                kafkaSinkForMap(key, value, flushWindowMinute);
+            });
+        }).thenRun(() -> {
+            logger.info("Flushed map to kafkaSink");
+            // send offset to mapper vis grpc
+            offsetSender.sendOffset(toFlushWindowCopy.getWindowOffset());
+        });        
     }
 
-    public void dummySinkForMap(long adId, int count, long timestamp) {
+    public void kafkaSinkForMap(long adId, int count, long timestamp) {
         logger.info("Flushed : adId: " + adId + " count: " + count + " timestamp: " + timestamp);
         // send to sink kafka topic
         kafkaSinkSender.sendMessage(new AdClickCount(adId, count, timestamp));

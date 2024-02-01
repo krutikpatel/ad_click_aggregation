@@ -65,6 +65,17 @@ private static final long serialVersionUID = 0L;
     return timestamp_;
   }
 
+  public static final int KAFKAOFFSET_FIELD_NUMBER = 3;
+  private long kafkaOffset_ = 0L;
+  /**
+   * <code>int64 kafkaOffset = 3;</code>
+   * @return The kafkaOffset.
+   */
+  @java.lang.Override
+  public long getKafkaOffset() {
+    return kafkaOffset_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -85,6 +96,9 @@ private static final long serialVersionUID = 0L;
     if (timestamp_ != 0L) {
       output.writeInt64(2, timestamp_);
     }
+    if (kafkaOffset_ != 0L) {
+      output.writeInt64(3, kafkaOffset_);
+    }
     getUnknownFields().writeTo(output);
   }
 
@@ -101,6 +115,10 @@ private static final long serialVersionUID = 0L;
     if (timestamp_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(2, timestamp_);
+    }
+    if (kafkaOffset_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(3, kafkaOffset_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -121,6 +139,8 @@ private static final long serialVersionUID = 0L;
         != other.getAdId()) return false;
     if (getTimestamp()
         != other.getTimestamp()) return false;
+    if (getKafkaOffset()
+        != other.getKafkaOffset()) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -138,6 +158,9 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getTimestamp());
+    hash = (37 * hash) + KAFKAOFFSET_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getKafkaOffset());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -275,6 +298,7 @@ private static final long serialVersionUID = 0L;
       bitField0_ = 0;
       adId_ = 0L;
       timestamp_ = 0L;
+      kafkaOffset_ = 0L;
       return this;
     }
 
@@ -313,6 +337,9 @@ private static final long serialVersionUID = 0L;
       }
       if (((from_bitField0_ & 0x00000002) != 0)) {
         result.timestamp_ = timestamp_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.kafkaOffset_ = kafkaOffset_;
       }
     }
 
@@ -366,6 +393,9 @@ private static final long serialVersionUID = 0L;
       if (other.getTimestamp() != 0L) {
         setTimestamp(other.getTimestamp());
       }
+      if (other.getKafkaOffset() != 0L) {
+        setKafkaOffset(other.getKafkaOffset());
+      }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
       return this;
@@ -402,6 +432,11 @@ private static final long serialVersionUID = 0L;
               bitField0_ |= 0x00000002;
               break;
             } // case 16
+            case 24: {
+              kafkaOffset_ = input.readInt64();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 24
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -479,6 +514,38 @@ private static final long serialVersionUID = 0L;
     public Builder clearTimestamp() {
       bitField0_ = (bitField0_ & ~0x00000002);
       timestamp_ = 0L;
+      onChanged();
+      return this;
+    }
+
+    private long kafkaOffset_ ;
+    /**
+     * <code>int64 kafkaOffset = 3;</code>
+     * @return The kafkaOffset.
+     */
+    @java.lang.Override
+    public long getKafkaOffset() {
+      return kafkaOffset_;
+    }
+    /**
+     * <code>int64 kafkaOffset = 3;</code>
+     * @param value The kafkaOffset to set.
+     * @return This builder for chaining.
+     */
+    public Builder setKafkaOffset(long value) {
+
+      kafkaOffset_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 kafkaOffset = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearKafkaOffset() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      kafkaOffset_ = 0L;
       onChanged();
       return this;
     }
